@@ -468,6 +468,10 @@ function cleanWKT(wkt) {
 }
 var index = function(wkt) {
   var lisp = parseString(wkt);
+  if (lisp[0] == "COMPD_CS") {
+    console.warn('COMPD_CS not yet supported. Stripped Vertical datum leaving only PROJCS');
+    lisp = lisp[2];
+  }
   var type = lisp.shift();
   var name = lisp.shift();
   lisp.unshift(['name', name]);
